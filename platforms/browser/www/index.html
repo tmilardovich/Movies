@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      
+      
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Movie App</title>
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- Link na CSS stil -->
+        <link href="css/glavniStil.css" type="text/css" rel="stylesheet" />
+        <!-- Link na JavaScript datoteku -->
+        <script type="text/javascript" src="js/main.js"></script>
+        
+        <link rel="stylesheet"href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="/path/to/tmdb.js"></script>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+        html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
+        .mySlides {display:none}
+        .w3-tag, .fa {cursor:pointer}
+        .w3-tag {height:15px;width:15px;padding:0;margin-top:6px}
+        .recenzijeBTN{
+          align-items: center;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+        }
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+        
+
+        <!-- Links (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-row w3-large w3-light-grey">
+        <div class="w3-col s3">
+            <a href="#" class="w3-button w3-block" style="color: black;" onclick="linkHome()">Home</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="#search" class="w3-button w3-block" style="color: black;" onclick="linkPretrazi()">Search</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="#discover" class="w3-button w3-block" style="color: black;" onclick="linkOtkrij()">Popular</a>
+        </div>
+        <div class="w3-col s3">
+            <a href="#find" class="w3-button w3-block" style="color: black;" onclick="linkYear()">By Year</a>
+        </div>
+        </div>
+    </div>
+  
+  <!-- Content -->
+  <div class="w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+    <div class="w3-panel" style="background-color:#F4F6F6;">
+      <h1><b>Pretraga filmova</b></h1>
+      <p>Aplikacija za pronalaženje podataka o filmovima.</p>
+      <br>
+      <p>Nakon unosa naziva filma, aplikacija pronalazi filmove koji odgovaraju unosu korisnika. Moguće je vidjeti informacije o radnji, datumu izlaska, prosječnoj ocjeni, popularnosti te promotivni poster.</p>
+      <p>Za svaki film moguće je ostaviti recenziju i ocjenu ili pregledati recenzije drugih korisnika.</p>
+      <p>Za pružanje informacija o filmovima korišten je <a href="https://developers.themoviedb.org/3/getting-started/introduction">The Movie Database API</a>, a za izradu, unos i dohvaćanje podataka iz baze <a href="https://restdb.io/">restdb.io</a></p>
+      <br><br><br>
+    </div>
+
+
+<!--Unos za /search-->
+<div style="background-color: #D6DBDF;">
+<div class="w3-center w3-padding-64" id="search">
+  <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Pretraga po nazivu fima</span>
+  <br><br>
+  <p>Unesite naziv filma.</p>
+  <p>Aplikacija će pronaći sve filmove čiji se naslovi podudaraju s unosom.</p>
+</div>
+<form class="w3-container" action="/action_page.php">
+  <div class="w3-section">
+    <label>Naziv</label>
+    <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Name" id="broj" placeholder="Naziv filma...">
+  </div>
+  <button type="submit" class="w3-button w3-block w3-black" id="dohvati">Pretrazi</button>
+  <strong><p id="brFilmova" style="color: seagreen;"></p></strong>
+  <strong><p id="ogranicenjePoruka" style="color: red;"></p></strong>
+  
+  <div id="ispis">
+
+  </div>
+  <p id="evo"></p>
+</form>
+
+
+<br><br>
+</div>
+<br>
+<!--Unos za /discover-->
+<div style="background-color: #ABB2B9;">
+<div class="w3-center w3-padding-64" id="discover">
+  <span class="w3-xlarge w3-bottombar w3-border-dark-grey w3-padding-16">Otkrij filmove</span>
+  <br><br>
+  <p>Pogledajte koji su najpopularniji filmovi...</p>
+
+  
+</div>
+<form class="w3-container" action="/action_page.php">
+  <button type="submit" class="w3-button w3-block w3-black" id="mostPopular">Najpopularniji filmovi</button>
+  <strong><p id="top10" style="color: red;"></p></strong>
+  <div id="divMostPopular">
+
+  </div>
+  
+  
+  <br><br>
+</div>
+<br>
+<div style="background-color: #808B96;">
+
+  <div id="find">
+    <br><br>
+  <p style="color: white;">Najpopularniji filmovi za unesenu godinu</p>
+  
+
+
+  <label style="color: white;">Godina: (npr. 2010)</label>
+  <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text" name="Name" id="pretragaGodina" placeholder="Unos godine...">
+  <button type="submit" class="w3-button w3-block w3-black" id="topRatedYear">Pretrazi</button>
+  <p id="vijest"><strong></strong></p>
+  <div id="col">
+
+  </div>
+
+</div>
+  
+  
+</form>
+
+<br><br>
+</div>
+
+
+  
+  <!-- Footer -->
+  
+  <footer class="w3-container w3-padding-32 w3-light-grey w3-center">
+    <h4>Footer</h4>
+    <br><br><br>
+    <p>Tomislav Milardović, PMF, 2020.</p>
+    <br><br>
+    <a href="#" class="w3-button w3-black w3-margin" onclick="linkHome()"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+    
+    
+  </footer>
+  
+  
+  <script>
+
+    function linkHome(){
+      window.location.href="#";
+    }
+
+    function linkPretrazi(){
+      window.location.href="#search"
+    }
+
+    function linkOtkrij(){
+      window.location.href="#discover"
+    }
+
+    function linkYear(){
+      window.location.href="#find"
+    }
+
+    
+  </script>
+
+        
+
+        
+    </body>
+</html>
+
+
