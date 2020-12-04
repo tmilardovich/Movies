@@ -1,4 +1,4 @@
-# Movies
+# Movies [![CodeFactor](https://www.codefactor.io/repository/github/tmilardovich/movies/badge)](https://www.codefactor.io/repository/github/tmilardovich/movies)
 Web application for searching movies and posting reviews.
 
 ## Appearance
