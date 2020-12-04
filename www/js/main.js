@@ -30,7 +30,6 @@ function dohvacanje() {
       document.getElementById(
         'brFilmova'
       ).innerHTML = `Broj pronađenih filmova je: ${objekt.total_results}`;
-      var imaLiOgranicenja = Number(objekt.total_results);
       if (Number(objekt.total_results) > 20) {
         document.getElementById('ogranicenjePoruka').innerHTML =
           'Prikazuje se 20 najrelevantnijih naslova.';
@@ -81,7 +80,6 @@ function dohvacanjeMostPopular() {
     if (zahtjev.status == 200 && zahtjev.readyState == 4) {
       objekt = JSON.parse(zahtjev.responseText);
       document.getElementById('top10').innerHTML = 'divMostPopular';
-      var imaLiOgranicenja = Number(objekt.total_results);
       if (Number(objekt.total_results) > 10) {
         document.getElementById('top10').innerHTML =
           'Prikazuje se 10 najrelevantnijih naslova.';
